@@ -1,13 +1,10 @@
-import express, {
-  Express,
-  Request,
-  Response,
-} from 'express';
+import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import { DataSource } from 'typeorm';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { Task } from './src/tasks/tasks.entity';
+import { tasksRouter } from './src/tasks/tasks.router';
 
 // Instantiate express app
 const app: Express = express();
@@ -34,11 +31,6 @@ export const AppDataSouce = new DataSource({
 // Define server port
 const port = process.env.PORT;
 
-// Create a default route
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
-});
-
 AppDataSouce.initialize()
   .then(() => {
     // Start listening to the requests on the defined port
@@ -51,3 +43,5 @@ AppDataSouce.initialize()
       err,
     );
   });
+
+app.use('/', tasksRouter);
