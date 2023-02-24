@@ -1,3 +1,15 @@
 ### Fetch all tasks
 GET http://localhost:3200/tasks
 Content-Type: application/json
+
+### Create a new task
+POST http://localhost:3200/tasks
+Content-Type: application/json
+
+{
+    "title": "Pay rent",
+    "date": "2022-02-24T12:00:00Z",
+    "description": "Pay $205 to landload",
+    "priority": "normal",
+    "status": "todo"
+}
