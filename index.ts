@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Create Database Connection
-export const AppDataSouce = new DataSource({
+export const AppDataSource = new DataSource({
   type: 'mysql',
   host: 'localhost',
   port: 3306,
@@ -31,7 +31,7 @@ export const AppDataSouce = new DataSource({
 // Define server port
 const port = process.env.PORT;
 
-AppDataSouce.initialize()
+AppDataSource.initialize()
   .then(() => {
     // Start listening to the requests on the defined port
     app.listen(port);
