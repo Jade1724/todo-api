@@ -2,7 +2,6 @@ import { body, ValidationChain } from 'express-validator';
 import { Priority } from '../enums/Priority';
 import { Status } from '../enums/Status';
 
-
 export const createValidator: ValidationChain[] = [
   body('title')
     .not()
@@ -34,7 +33,31 @@ export const createValidator: ValidationChain[] = [
     ),
   body('status')
     .trim()
-    .isIn([Status.todo, Status.inProgress, Status.completed])
+    .isIn([
+      Status.todo,
+      Status.inProgress,
+      Status.completed,
+    ])
+    .withMessage(
+      'Status can only be todo, inProgress, or completed',
+    ),
+];
+
+export const updateValidator = [
+  body('id')
+    .not()
+    .isEmpty()
+    .withMessage('The task id is mandatory')
+    .trim()
+    .isString()
+    .withMessage('ID needs to be a valid uuid format'),
+  body('status')
+    .trim()
+    .isIn([
+      Status.todo,
+      Status.inProgress,
+      Status.completed,
+    ])
     .withMessage(
       'Status can only be todo, inProgress, or completed',
     ),
